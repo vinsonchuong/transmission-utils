@@ -6,34 +6,17 @@ pkgdesc='A set of command-line scripts that automate common tasks in Transmissio
 arch=('any')
 url='https://github.com/vinsonchuong/transmission-utils'
 license=('MIT')
-groups=()
 depends=('transmission-cli')
 makedepends=('git' 'ruby-ronn' 'xidel')
-checkdepends=()
-optdepends=()
-conflicts=()
-provides=()
-replaces=()
-backup=()
-options=()
-install="$pkgname.install"
-changelog="$pkgname.changelog"
-source=("git+https://github.com/vinsonchuong/$pkgname#tag=v$pkgver")
-noextract=()
-md5sums=()
-
-prepare() {
-	return
-}
+source=("https://github.com/vinsonchuong/$pkgname/archive/v$pkgver.tar.gz")
+md5sums=('SKIP')
 
 build() {
-	ls "$srcdir"
-	exit
-	cd "$srcdir"
+	cd "$srcdir/$pkgname"
 	ronn docs/*.md
 	mkdir 'help'
 	local script
-	for script in bin/*
+	for script in $(find 'bin' -type f -printf "%f\n")
 	do
 		local html=$(cat "docs/$script.1.html")
 		html=$(echo "$HTML" | sed 's/<var>\([^<]*\)<\/var>/\&lt;\1\&gt;/g')
@@ -56,16 +39,11 @@ build() {
 	done
 }
 
-check() {
-	return
-}
-
 package() {
-	exit
-	cd "$srcdir"
-	install -Dm755 -t "$pkgdir/usr/bin" $srcdir/bin/*
-	install -Dm644 -t "$pkgdir/usr/share/doc/$pkgname" "$srcdir/README.md"
-	install -Dm644 -t "$pkgdir/usr/share/doc/$pkgname/docs" $srcdir/docs/*
-	install -Dm644 -t "$pkgdir/usr/share/licenses/$pkgname" "$srcdir/LICENSE"
-	install -Dm644 -t "$pkgdir/usr/share/man/man1" $srcdir/docs/*.1
+	cd "$srcdir/$pkgname"
+	install -Dm755 -t "$pkgdir/usr/bin" bin/*
+	install -Dm644 -t "$pkgdir/usr/share/doc/$pkgname" 'README.md'
+	install -Dm644 -t "$pkgdir/usr/share/doc/$pkgname/docs" docs/*.md
+	install -Dm644 -t "$pkgdir/usr/share/licenses/$pkgname" 'LICENSE'
+	install -Dm644 -t "$pkgdir/usr/share/man/man1" docs/*.1
 }

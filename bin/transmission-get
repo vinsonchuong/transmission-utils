@@ -11,7 +11,7 @@ do
 			;;
 		-o|--output)
 			DIRECTORY="$2"
-			shift
+			shift 2
 			;;
 		--)
 			shift
@@ -22,21 +22,7 @@ done
 
 if [ -n "$SHOW_HELP" ]
 then
-	HTML=$(cat docs/transmission-get.md | ronn -5 | sed 's/<var>\([^<]*\)<\/var>/\&lt;\1\&gt;/g')
-	echo "$HTML" \
-		| xidel -q --css '.man-name' -
-	echo
-	echo 'Usage:'
-	echo "$HTML" \
-		| xidel -q --css '#SYNOPSIS + p' - \
-		| sed 's/^/  /'
-	echo
-	echo 'Options:'
-	echo "$HTML" \
-		| xidel -q --css '#OPTIONS + dl > *' - \
-		| paste -d ':' - - \
-		| column -t -s ':' \
-		| sed 's/^/ /'
+	cat '/usr/share/doc/transmission-utils/help/transmission-get'
 	exit
 fi
 
