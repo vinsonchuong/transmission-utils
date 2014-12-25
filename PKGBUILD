@@ -9,10 +9,10 @@ license=('MIT')
 depends=('transmission-cli')
 makedepends=('git' 'ruby-ronn' 'xidel')
 source=("https://github.com/vinsonchuong/$pkgname/archive/v$pkgver.tar.gz")
-md5sums=('SKIP')
+md5sums=('a974464dd8d495502e36528f3977aaa5')
 
 build() {
-	cd "$srcdir/$pkgname"
+	cd "$srcdir/$pkgname-$pkgver"
 	ronn docs/*.md
 	mkdir 'help'
 	local script
@@ -40,7 +40,7 @@ build() {
 }
 
 package() {
-	cd "$srcdir/$pkgname"
+	cd "$srcdir/$pkgname-$pkgver"
 	install -Dm755 -t "$pkgdir/usr/bin" bin/*
 	install -Dm644 -t "$pkgdir/usr/share/doc/$pkgname" 'README.md'
 	install -Dm644 -t "$pkgdir/usr/share/doc/$pkgname/docs" docs/*.md
