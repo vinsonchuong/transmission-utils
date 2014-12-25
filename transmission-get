@@ -1,0 +1,37 @@
+#!/bin/bash -e
+ARGS=$(getopt -o  ho: -l help,output: -- "$@")
+eval set -- $ARGS
+
+while [ $# -gt 0 ]
+do
+	case "$1" in
+		-h|--help)
+			SHOW_HELP=yes
+			shift
+			;;
+		-o|--output)
+			DIRECTORY="$2"
+			shift
+			;;
+		--)
+			shift
+			break
+			;;
+	esac
+done
+
+if [ -n "$SHOW_HELP" ]
+then
+	cat '/usr/share/doc/transmission-utils/help/transmission-get'
+	exit
+fi
+
+TMP=$(mktemp -d)
+tee $TMP/settings.json <<EOF
+{
+	"idle-seeding-limit-enabled": true,
+	"idle-seeding-limit": 0
+}
+EOF
+transmission-cli -g $TMP "${!#}"
+rm -rf $TMP
