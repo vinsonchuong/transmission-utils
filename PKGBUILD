@@ -42,6 +42,7 @@ build() {
 package() {
 	cd "$srcdir/$pkgname-$pkgver"
 	install -Dm755 -t "$pkgdir/usr/bin" bin/*
+	install -Dm644 -t "$pkgdir/usr/share/$pkgname/help" help/*
 	install -Dm644 -t "$pkgdir/usr/share/doc/$pkgname" 'README.md'
 	install -Dm644 -t "$pkgdir/usr/share/doc/$pkgname/docs" docs/*.md
 	install -Dm644 -t "$pkgdir/usr/share/licenses/$pkgname" 'LICENSE'

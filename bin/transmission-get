@@ -22,7 +22,7 @@ done
 
 if [ -n "$SHOW_HELP" ]
 then
-	cat '/usr/share/doc/transmission-utils/help/transmission-get'
+	cat '/usr/share/transmission-utils/help/transmission-get'
 	exit
 fi
 
