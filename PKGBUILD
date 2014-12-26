@@ -7,9 +7,9 @@ arch=('any')
 url='https://github.com/vinsonchuong/transmission-utils'
 license=('MIT')
 depends=('transmission-cli')
-makedepends=('git' 'ruby-ronn' 'xidel')
+makedepends=('ruby-ronn' 'xidel')
 source=("https://github.com/vinsonchuong/$pkgname/archive/v$pkgver.tar.gz")
-md5sums=('a974464dd8d495502e36528f3977aaa5')
+md5sums=()
 
 build() {
 	cd "$srcdir/$pkgname-$pkgver"
