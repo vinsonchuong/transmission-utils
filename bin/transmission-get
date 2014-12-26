@@ -1,7 +1,9 @@
 #!/bin/bash -e
+SHOW_HELP='no'
+OUTPUT_DIRECTORY="$PWD"
+
 ARGS=$(getopt -o  ho: -l help,output: -- "$@")
 eval set -- $ARGS
-
 while [ $# -gt 0 ]
 do
 	case "$1" in
@@ -10,7 +12,7 @@ do
 			shift
 			;;
 		-o|--output)
-			DIRECTORY="$2"
+			OUTPUT_DIRECTORY="$2"
 			shift 2
 			;;
 		--)
@@ -20,18 +22,17 @@ do
 	esac
 done
 
-if [ -n "$SHOW_HELP" ]
+if [ "$SHOW_HELP" = 'yes' ]
 then
 	cat '/usr/share/transmission-utils/help/transmission-get'
-	exit
+else
+	TMP=$(mktemp -d)
+	tee $TMP/settings.json <<-EOF
+	{
+		"idle-seeding-limit-enabled": true,
+		"idle-seeding-limit": 0
+	}
+	EOF
+	transmission-cli -g $TMP -w "$OUTPUT_DIRECTORY" "${!#}"
+	rm -rf $TMP
 fi
-
-TMP=$(mktemp -d)
-tee $TMP/settings.json <<EOF
-{
-	"idle-seeding-limit-enabled": true,
-	"idle-seeding-limit": 0
-}
-EOF
-transmission-cli -g $TMP "${!#}"
-rm -rf $TMP
