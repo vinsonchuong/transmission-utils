@@ -4,7 +4,7 @@ A set of command-line scripts that automate common tasks in
 
 ## Scripts
 * `transmission-get` downloads a given torrent
-  ([docs](docs/transmission-get.md), [code](bin/transmission-get)) 
+  ([docs](doc/transmission-get.md), [code](bin/transmission-get)) 
 
 ## Installing
 If the target machine is running [Arch Linux](https://www.archlinux.org/),
