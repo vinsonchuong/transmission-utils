@@ -1,8 +1,8 @@
 # transmission-get(1) -- download a given torrent
 
 ## SYNOPSIS
-`transmission-get` [`-o`|`--output` .]  <torrent><br>
-`transmission-get` `-o`|`--output` <directory> [`--`] <torrent><br>
+`transmission-get` [`-o`|`--output` .]  _torrent_<br>
+`transmission-get` `-o`|`--output` _directory_ [`--`] _torrent_<br>
 `transmission-get` `-h`|`--help`<br>
 
 ## DESCRIPTION
@@ -17,12 +17,12 @@ By default, `transmission-get` downloads into the working directory. The
 ## OPTIONS
 * -h, --help:
   Show help text and exit.
-* -o, --output <directory>:
+* -o, --output _directory_:
   Download to the specified directory.
 
 ## COPYRIGHT
 `transmission-utils` (the package containing `transmission-get`) is
-Copyright (c) 2014 Vinson Chuong under The MIT License.
+Copyright (c) 2015 Vinson Chuong under The MIT License.
 
 ## SEE ALSO
 transmission-cli(1)
