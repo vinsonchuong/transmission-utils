@@ -22,7 +22,7 @@ By default, `transmission-get` downloads into the working directory. The
 
 ## COPYRIGHT
 `transmission-utils` (the package containing `transmission-get`) is
-Copyright (c) 2015 Vinson Chuong under The MIT License.
+Copyright (c) 2016 Vinson Chuong under The MIT License.
 
 ## SEE ALSO
 transmission-cli(1)
